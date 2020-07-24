@@ -1,2 +1,3 @@
 # Java-Chess
-Xadres de linha de comando em Java.
+
+Xadrez de linha de comando em Java.
