@@ -1,7 +1,5 @@
 package board.layer;
 
-import javax.crypto.spec.PSource;
-
 public class Board {
 
 	private int rows;
@@ -20,16 +18,19 @@ public class Board {
 			throw new BoardException("Error creating board: there must be at least 1 row and 1 column");
 		}
 	}
+
 	private void checksOccupiedPosition(Position position) {
 		if (thereIsAPiece(position)) {
 			throw new BoardException("There is already a piece on position" + position);
 		}
 	}
+
 	private void checksPositionExists(int row, int column) {
 		if (!positionExists(row, column)) {
 			throw new BoardException("Position not on the board");
 		}
 	}
+
 	private void checksPositionExists(Position position) {
 		if (!positionExists(position)) {
 			throw new BoardException("Position not on the board");
@@ -74,5 +75,4 @@ public class Board {
 		checksPositionExists(position);
 		return getPiece(position) != null;
 	}
-
 }
