@@ -3,9 +3,18 @@ package chess.layer;
 import board.layer.Board;
 import board.layer.Position;
 import chess.pieces.Rook;
+import chess.pieces.Bishop;
+import chess.pieces.King;
 
 public class ChessMatch {
 
+//	private int8 turn;
+//	private Color currentPlayer;
+//	private boolean isInCheck;
+//	private boolean isInCheckMate;
+//	private ChessPiece enPassantVulnerable;
+//	private ChessPiece promoted;
+	
 	private Board board;
 
 	public ChessMatch() {
@@ -13,6 +22,14 @@ public class ChessMatch {
 		initializeMatch();
 	}
 
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	private void initializeMatch() {
+		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 3));
+		board.placePiece(new King(board, Color.WHITE), new Position(4, 5));
+		board.placePiece(new Bishop(board, Color.WHITE), new Position(6, 6));
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	public ChessPiece[][] getPieces() {
 		ChessPiece[][] chessPieceMatrix = new ChessPiece[board.getRows()][board.getColumns()];
 		for (int row = 0; row < board.getRows(); row++) {
@@ -23,8 +40,19 @@ public class ChessMatch {
 		return chessPieceMatrix;
 	}
 
-	private void initializeMatch() {
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 3));
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public boolean possibleMoves(ChessPosition sourcePosition) {
+		return true;
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public ChessPosition performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+		return new ChessPosition('z', 42);
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public ChessPiece replacePrmotedPiece(String type) {
+		return new ChessPiece(board, null);
 	}
 
 }
