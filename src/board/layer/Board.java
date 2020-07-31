@@ -37,11 +37,19 @@ public class Board {
 	public void placePiece(Piece piece, Position position) {
 		checksOccupiedPosition(position);
 		pieces[position.getRow()][position.getColumn()] = piece;
-		piece.position = position;
+		piece.setPosition(position);
 	}
+
 	public Piece removePiece(Position position) {
-		return new Piece();
+		if (thereIsAPiece(position)) {
+			Piece piece = getPiece(position);
+			piece.setPosition(null);
+			pieces[position.getRow()][position.getColumn()] = null;
+			return piece;
+		}
+		return null;
 	}
+
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private boolean positionExists(int row, int column) {
 		boolean insideRowsRange = row >= 0 && row < rows;

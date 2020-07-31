@@ -2,7 +2,7 @@ package board.layer;
 
 public class Piece {
 
-	protected Position position;
+	private Position position;
 	private Board board;
 
 	public Piece() { // APAGAR
@@ -15,6 +15,10 @@ public class Piece {
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	protected Board getBoard() {
 		return board;
+	}
+	
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

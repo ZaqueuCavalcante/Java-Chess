@@ -1,6 +1,7 @@
 package chess.layer;
 
 import board.layer.Board;
+
 import board.layer.Position;
 import chess.pieces.Rook;
 import chess.pieces.Bishop;
@@ -24,9 +25,9 @@ public class ChessMatch {
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private void initializeMatch() {
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 3));
-		board.placePiece(new King(board, Color.WHITE), new Position(4, 5));
-		board.placePiece(new Bishop(board, Color.WHITE), new Position(6, 6));
+		board.placePiece(new Rook(board, Color.BLACK), new Position(2, 3));
+		board.placePiece(new King(board, Color.BLACK), new Position(4, 5));
+		board.placePiece(new Bishop(board, Color.BLACK), new Position(6, 6));
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
