@@ -1,9 +1,30 @@
 package view.layer;
 
+import java.util.InputMismatchException;
+
 import chess.layer.ChessPiece;
+import chess.layer.ChessPosition;
 import chess.layer.Color;
 
 public class UserInterface {
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public static ChessPosition readChessPosition(String userInput) {
+		try {
+			char column = userInput.charAt(0);
+			int row = Integer.parseInt(userInput.substring(1));
+			return new ChessPosition(column, row);
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
+		}
+	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	public static void print(ChessPiece[][] chessPieceMatrix) {

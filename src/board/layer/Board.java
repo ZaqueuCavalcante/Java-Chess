@@ -51,13 +51,13 @@ public class Board {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	private boolean positionExists(int row, int column) {
+	public boolean positionExists(int row, int column) {
 		boolean insideRowsRange = row >= 0 && row < rows;
 		boolean insideColumnsRange = column >= 0 && column < columns;
 		return insideRowsRange && insideColumnsRange;
 	}
 
-	private boolean positionExists(Position position) {
+	public boolean positionExists(Position position) {
 		return positionExists(position.getRow(), position.getColumn());
 	}
 

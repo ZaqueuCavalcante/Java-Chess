@@ -1,11 +1,11 @@
 package chess.layer;
 
 import board.layer.Board;
-
+import board.layer.Piece;
 import board.layer.Position;
-import chess.pieces.Rook;
 import chess.pieces.Bishop;
 import chess.pieces.King;
+import chess.pieces.Rook;
 
 public class ChessMatch {
 
@@ -25,9 +25,14 @@ public class ChessMatch {
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private void initializeMatch() {
-		board.placePiece(new Rook(board, Color.BLACK), new Position(2, 3));
-		board.placePiece(new King(board, Color.BLACK), new Position(4, 5));
-		board.placePiece(new Bishop(board, Color.BLACK), new Position(6, 6));
+		placePiece(new Rook(board, Color.BLACK), 'b', 3);
+		placePiece(new King(board, Color.BLACK), 'd', 5);
+		placePiece(new Bishop(board, Color.BLACK), 'f', 7);
+	}
+	
+	private void placePiece(ChessPiece chessPiece, char column, int row) {
+		Position position = new ChessPosition(column, row).toPosition();
+		board.placePiece(chessPiece, position);
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -47,13 +52,42 @@ public class ChessMatch {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	public ChessPosition performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
-		return new ChessPosition('z', 42);
+	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+		Position source = sourcePosition.toPosition();
+		Position target = targetPosition.toPosition();
+		validateSourcePosition(source);
+		validateTargetPosition(source, target);
+		Piece capturedPiece = makeMove(source, target);
+		return (ChessPiece) capturedPiece;
+	}
+	
+	private void validateSourcePosition(Position position) {
+		if (!board.thereIsAPiece(position)) {
+			throw new ChessException("There is no piece on source position.");
+		}
+		if (!board.getPiece(position).isThereAnyPossibleMove()) {
+			throw new ChessException("There is no possible moves for the chosen piece.");
+		}
+	}
+	
+	private void validateTargetPosition(Position source, Position target) {
+		Piece sourcePiece = board.getPiece(source);
+		boolean notPossibleMove = !sourcePiece.possibleMove(target);
+		if (notPossibleMove) {
+			throw new ChessException("The chosen piece can't move to target position.");
+		}
+	}
+	
+	private Piece makeMove(Position source, Position target) {
+		Piece currentPlayerPiece = board.removePiece(source);
+		Piece capturedPiece = board.removePiece(target);
+		board.placePiece(currentPlayerPiece, target);
+		return capturedPiece;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	public ChessPiece replacePrmotedPiece(String type) {
-		return new ChessPiece(board, null);
-	}
+//	public ChessPiece replacePrmotedPiece(String type) {
+//		return new ChessPiece(board, null);
+//	}
 
 }

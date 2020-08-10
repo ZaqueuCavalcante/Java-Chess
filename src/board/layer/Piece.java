@@ -1,8 +1,8 @@
 package board.layer;
 
-public class Piece {
+public abstract class Piece {
 
-	private Position position;
+	protected Position position;
 	private Board board;
 
 	public Piece() { // APAGAR
@@ -22,16 +22,23 @@ public class Piece {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	public boolean possibleMoves() {
-		return true;
-	}
+	public abstract boolean[][] possibleMoves();
 
 	public boolean possibleMove(Position position) {
-		return true;
+		return possibleMoves()[position.getRow()][position.getColumn()];
 	}
 
 	public boolean isThereAnyPossibleMove() {
-		return true;
+		boolean[][] possibleMovesMatrix = possibleMoves();
+		int size = possibleMovesMatrix.length;
+		for (int row = 0; row < size; row++) {
+			for (int column = 0; column < size; column++) {
+				if (possibleMovesMatrix[row][column]) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
