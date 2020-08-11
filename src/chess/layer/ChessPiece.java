@@ -3,6 +3,7 @@ package chess.layer;
 import board.layer.Board;
 import board.layer.Piece;
 import board.layer.Position;
+import view.layer.Color;
 
 public abstract class ChessPiece extends Piece {
 
@@ -12,7 +13,6 @@ public abstract class ChessPiece extends Piece {
 	public ChessPiece(Board board, Color color) {
 		super(board);
 		this.color = color;
-		this.moveCount = 0;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -28,16 +28,22 @@ public abstract class ChessPiece extends Piece {
 	public void increaseMoveCount() {
 		moveCount++;
 	}
+	
+	public void decreaseMoveCount() {
+		moveCount--;
+	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	public ChessPosition getChessPosition() {
-		return new ChessPosition('z', 42);
+		return ChessPosition.fromPosition(position);
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	protected boolean isThereOpponentPiece(Position position) {
-		ChessPiece opponentChessPiece = (ChessPiece) getBoard().getPiece(position);
-		return opponentChessPiece != null && opponentChessPiece.getColor() != this.color;
+		ChessPiece opponentPiece = (ChessPiece) getBoard().getPiece(position);
+		boolean isNotNull = opponentPiece != null;
+		boolean isNotSameColor = opponentPiece.getColor() != this.color;
+		return isNotNull && isNotSameColor;
 	}
 
 }

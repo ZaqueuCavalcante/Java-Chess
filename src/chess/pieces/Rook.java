@@ -3,7 +3,7 @@ package chess.pieces;
 import board.layer.Board;
 import board.layer.Position;
 import chess.layer.ChessPiece;
-import chess.layer.Color;
+import view.layer.Color;
 
 public class Rook extends ChessPiece {
 

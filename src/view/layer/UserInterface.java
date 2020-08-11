@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
-import chess.layer.Color;
 
 public class UserInterface {
 

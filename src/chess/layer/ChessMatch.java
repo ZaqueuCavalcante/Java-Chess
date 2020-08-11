@@ -6,6 +6,7 @@ import board.layer.Position;
 import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Rook;
+import view.layer.Color;
 
 public class ChessMatch {
 

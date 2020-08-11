@@ -2,7 +2,7 @@ package chess.pieces;
 
 import board.layer.Board;
 import chess.layer.ChessPiece;
-import chess.layer.Color;
+import view.layer.Color;
 
 public class Bishop extends ChessPiece {
 

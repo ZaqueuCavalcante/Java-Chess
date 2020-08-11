@@ -5,20 +5,17 @@ public abstract class Piece {
 	protected Position position;
 	private Board board;
 
-	public Piece() { // APAGAR
-	}
-
 	public Piece(Board board) {
 		this.board = board;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	protected Board getBoard() {
-		return board;
-	}
-	
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+	
+	protected Board getBoard() {
+		return board;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

@@ -41,11 +41,12 @@ public class Board {
 	}
 
 	public Piece removePiece(Position position) {
+		checksPositionExists(position);
 		if (thereIsAPiece(position)) {
-			Piece piece = getPiece(position);
-			piece.setPosition(null);
+			Piece pieceRemoved = getPiece(position);
+			pieceRemoved.setPosition(null);
 			pieces[position.getRow()][position.getColumn()] = null;
-			return piece;
+			return pieceRemoved;
 		}
 		return null;
 	}
@@ -62,7 +63,6 @@ public class Board {
 	}
 
 	public boolean thereIsAPiece(Position position) {
-		checksPositionExists(position);
 		return getPiece(position) != null;
 	}
 
