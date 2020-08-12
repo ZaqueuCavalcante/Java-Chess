@@ -19,7 +19,7 @@ public class Program {
 		while (true) {
 			try {
 				UserInterface.clearScreen();
-				UserInterface.print(chessMatch.getPieces());
+				UserInterface.print(chessMatch);
 				System.out.println();
 				System.out.print("Source: ");
 				ChessPosition source = UserInterface.readChessPosition(scanner);
@@ -32,7 +32,8 @@ public class Program {
 				System.out.print("Target: ");
 				ChessPosition target = UserInterface.readChessPosition(scanner);
 
-				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+				chessMatch.performChessMove(source, target);
+				
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
 				scanner.nextLine();

@@ -1,9 +1,14 @@
 package view.layer;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
-
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import com.sun.glass.ui.View.Capability;
+
+import chess.layer.ChessMatch;
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
 
@@ -28,7 +33,16 @@ public class UserInterface {
 		}
 	}
 
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //	
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public static void print(ChessMatch chessMatch) {
+		print(chessMatch.getPieces());
+		System.out.println();
+		print(chessMatch.getCapturedPieces());
+		System.out.println();
+		System.out.println("Turn: " + chessMatch.getTurn());
+		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+	}
+
 	public static void print(ChessPiece[][] chessPieceMatrix, boolean[][] possibleMovesMatrix) {
 		int size = chessPieceMatrix.length;
 		for (int row = 0; row < size; row++) {
@@ -40,7 +54,7 @@ public class UserInterface {
 		}
 		System.out.println("  a b c d e f g h ");
 	}
-	
+
 	public static void print(ChessPiece[][] chessPieceMatrix) {
 		int size = chessPieceMatrix.length;
 		for (int row = 0; row < size; row++) {
@@ -70,5 +84,20 @@ public class UserInterface {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	public static void print(List<ChessPiece> capturedPieces) {
+		List<ChessPiece> whitePieces = capturedPieces.stream().
+				filter(piece -> piece.getColor() == Color.WHITE).
+				collect(Collectors.toList());
+		List<ChessPiece> blackPieces = capturedPieces.stream().
+				filter(piece -> piece.getColor() == Color.BLACK).
+				collect(Collectors.toList());
+		System.out.println("Captured pieces: ");
+		System.out.print("White: " + AnsiColors.ANSI_WHITE);
+		System.out.println(Arrays.toString(whitePieces.toArray()));
+		System.out.print(AnsiColors.ANSI_RESET);
+		System.out.print(AnsiColors.ANSI_YELLOW + "Black: " + AnsiColors.ANSI_YELLOW);
+		System.out.println(Arrays.toString(blackPieces.toArray()));
+		System.out.print(AnsiColors.ANSI_RESET);
+	}
 
 }
