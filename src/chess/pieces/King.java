@@ -28,6 +28,11 @@ public class King extends ChessPiece {
 		checksInDirection(possibleMovesMatrix, 0, -1); // Left
 		checksInDirection(possibleMovesMatrix, +1, 0); // Down
 		checksInDirection(possibleMovesMatrix, 0, +1); // Right
+		
+		checksInDirection(possibleMovesMatrix, -1, -1); // Between above and left
+		checksInDirection(possibleMovesMatrix, +1, -1); // Between left and down
+		checksInDirection(possibleMovesMatrix, +1, +1); // Between down and right
+		checksInDirection(possibleMovesMatrix, -1, +1); // Between right and above
 
 		return possibleMovesMatrix;
 	}

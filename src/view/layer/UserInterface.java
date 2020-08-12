@@ -1,11 +1,11 @@
 package view.layer;
 
 import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
-import sun.swing.BakedArrayList;
 
 public class UserInterface {
 
