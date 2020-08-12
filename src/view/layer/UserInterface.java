@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import com.sun.glass.ui.View.Capability;
-
 import chess.layer.ChessMatch;
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
@@ -37,10 +35,13 @@ public class UserInterface {
 	public static void print(ChessMatch chessMatch) {
 		print(chessMatch.getPieces());
 		System.out.println();
-		print(chessMatch.getCapturedPieces());
+		print(chessMatch.getCapturedChessPieces());
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
 		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+		if (chessMatch.getIsInCheck()) {
+			System.out.println("CHECK!");
+		}
 	}
 
 	public static void print(ChessPiece[][] chessPieceMatrix, boolean[][] possibleMovesMatrix) {
@@ -99,5 +100,7 @@ public class UserInterface {
 		System.out.println(Arrays.toString(blackPieces.toArray()));
 		System.out.print(AnsiColors.ANSI_RESET);
 	}
+	
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 }
