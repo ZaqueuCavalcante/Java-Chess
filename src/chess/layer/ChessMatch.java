@@ -16,7 +16,7 @@ public class ChessMatch {
 	private int turn;
 	private Color currentPlayer;
 	private boolean isInCheck;
-//	private boolean isInCheckMate;
+	private boolean isInCheckMate;
 //	private ChessPiece enPassantVulnerable;
 //	private ChessPiece promoted;
 
@@ -47,6 +47,10 @@ public class ChessMatch {
 		return isInCheck;
 	}
 	
+	public boolean getIsInCheckMate() {
+		return isInCheckMate;
+	}
+	
  	private void nextTurn() {
 		turn++;
 		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
@@ -66,7 +70,8 @@ public class ChessMatch {
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private void placeInitialPieces() {
-		placePiece(new Rook(board, Color.WHITE), 'a', 1);
+		placePiece(new Rook(board, Color.WHITE), 'h', 7);
+		placePiece(new Rook(board, Color.WHITE), 'd', 1);
 //		placePiece(new Knight(board, Color.WHITE), 'b', 1);
 //		placePiece(new Bishop(board, Color.WHITE), 'c', 1);
 //		placePiece('d', 1, new Queen(board, Color.WHITE));
@@ -83,11 +88,11 @@ public class ChessMatch {
 //		placePiece('g', 2, new Pawn(board, Color.WHITE, this));
 //		placePiece('h', 2, new Pawn(board, Color.WHITE, this));
 
-		placePiece(new Rook(board, Color.BLACK), 'a', 8);
+		placePiece(new Rook(board, Color.BLACK), 'b', 8);
 //	    placePiece('b', 8, new Knight(board, Color.BLACK));
 //	        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
 //	        placeNewPiece('d', 8, new Queen(board, Color.BLACK));
-		placePiece(new King(board, Color.BLACK), 'e', 8);
+		placePiece(new King(board, Color.BLACK), 'a', 8);
 //	        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
 //	        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
 //	        placeNewPiece('h', 8, new Rook(board, Color.BLACK));
@@ -142,7 +147,11 @@ public class ChessMatch {
 		Color opponentPlayer = getOpponentColor(currentPlayer);
 		isInCheck = (isInCheck(opponentPlayer)) ? true : false;
 		
-		nextTurn();
+		if (isInCheckMate(opponentPlayer)) {
+			isInCheckMate = true;
+		} else {
+			nextTurn();
+		}
 	}
 
 	private void validateSourcePosition(Position position) {
@@ -229,11 +238,38 @@ public class ChessMatch {
 		return false;
 	}
 	
+	private boolean isInCheckMate(Color playerColor) {
+		if (isInCheck(playerColor)) {
+			List<Piece> playerPieces = piecesOnTheBoard.stream().
+					filter(piece -> ((ChessPiece)piece).getColor() == playerColor).
+					collect(Collectors.toList());
+			
+			boolean[][] playerPiecePossibleMovesMatrix;
+			for (Piece piece : playerPieces) {
+				playerPiecePossibleMovesMatrix = piece.possibleMoves();
+				for (int row=0; row<board.getRows(); row++) {
+					for (int column=0; column<board.getColumns(); column++) {
+						if (playerPiecePossibleMovesMatrix[row][column]) {
+							Position sourcePiecePosition = ((ChessPiece) piece).getChessPosition().toPosition();
+							Position targetPiecePosition = new Position(row, column);
+							Piece capturedPiece = makeMove(sourcePiecePosition, targetPiecePosition);
+							boolean isInCheck = isInCheck(playerColor);
+							undoMove(sourcePiecePosition, targetPiecePosition, capturedPiece);
+							if (!isInCheck) {
+								return false;
+							}
+						}
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 //	public ChessPiece replacePrmotedPiece(String type) {
 //		return new ChessPiece(board, null);
 //	}
 	
-	
-
 }

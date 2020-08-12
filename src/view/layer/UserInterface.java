@@ -38,10 +38,16 @@ public class UserInterface {
 		print(chessMatch.getCapturedChessPieces());
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-		if (chessMatch.getIsInCheck()) {
-			System.out.println("CHECK!");
+		if (!chessMatch.getIsInCheckMate()) {
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+			if (chessMatch.getIsInCheck()) {
+				System.out.println("CHECK!");
+			}
+		} else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
 		}
+		
 	}
 
 	public static void print(ChessPiece[][] chessPieceMatrix, boolean[][] possibleMovesMatrix) {

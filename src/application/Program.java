@@ -15,8 +15,8 @@ public class Program {
 
 		ChessMatch chessMatch = new ChessMatch();
 		Scanner scanner = new Scanner(System.in);
-
-		while (true) {
+		
+		while (!chessMatch.getIsInCheckMate()) {
 			try {
 				UserInterface.clearScreen();
 				UserInterface.print(chessMatch);
@@ -42,6 +42,8 @@ public class Program {
 				scanner.nextLine();
 			}
 		}
+		UserInterface.clearScreen();
+		UserInterface.print(chessMatch);
 	}
 
 }
