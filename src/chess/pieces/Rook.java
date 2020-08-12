@@ -40,6 +40,7 @@ public class Rook extends ChessPiece {
 
 		while (conditionsToMove(nextPositionToCheck)) {
 			possibleMovesMatrix[newRow][newColumn] = true;
+			System.out.println("TRUE");
 			newRow += rowIncrement;
 			newColumn += columnIncrement;
 			nextPositionToCheck.setRowAndColumn(newRow, newColumn);
@@ -47,10 +48,9 @@ public class Rook extends ChessPiece {
 	}
 
 	private boolean conditionsToMove(Position nextPositionToCheck) {
-		boolean positionExists = this.getBoard().positionExists(nextPositionToCheck);
 		boolean thereNoIsAPiece = !this.getBoard().thereIsAPiece(nextPositionToCheck);
 		boolean isThereOpponentPiece = this.isThereOpponentPiece(nextPositionToCheck);
-		return positionExists && (thereNoIsAPiece || isThereOpponentPiece);
+		return thereNoIsAPiece || isThereOpponentPiece;
 	}
 
 }

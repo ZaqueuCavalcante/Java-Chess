@@ -22,13 +22,11 @@ public class Program {
 				UserInterface.print(chessMatch.getPieces());
 				System.out.println();
 				System.out.print("Source: ");
-				String userInput = scanner.next();
-				ChessPosition source = UserInterface.readChessPosition(userInput);
+				ChessPosition source = UserInterface.readChessPosition(scanner);
 
 				System.out.println();
 				System.out.print("Target: ");
-				userInput = scanner.next();
-				ChessPosition target = UserInterface.readChessPosition(userInput);
+				ChessPosition target = UserInterface.readChessPosition(scanner);
 
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 			} catch (ChessException e) {

@@ -1,6 +1,7 @@
 package view.layer;
 
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
@@ -15,8 +16,9 @@ public class UserInterface {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	public static ChessPosition readChessPosition(String userInput) {
+	public static ChessPosition readChessPosition(Scanner scanner) {
 		try {
+			String userInput = scanner.nextLine();
 			char column = userInput.charAt(0);
 			int row = Integer.parseInt(userInput.substring(1));
 			return new ChessPosition(column, row);
