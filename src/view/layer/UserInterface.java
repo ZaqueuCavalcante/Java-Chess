@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import chess.layer.ChessPiece;
 import chess.layer.ChessPosition;
+import sun.swing.BakedArrayList;
 
 public class UserInterface {
 
@@ -27,20 +28,35 @@ public class UserInterface {
 		}
 	}
 
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //	
+	public static void print(ChessPiece[][] chessPieceMatrix, boolean[][] possibleMovesMatrix) {
+		int size = chessPieceMatrix.length;
+		for (int row = 0; row < size; row++) {
+			System.out.print((size - row) + " ");
+			for (int column = 0; column < size; column++) {
+				print(chessPieceMatrix[row][column], possibleMovesMatrix[row][column]);
+			}
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h ");
+	}
+	
 	public static void print(ChessPiece[][] chessPieceMatrix) {
 		int size = chessPieceMatrix.length;
 		for (int row = 0; row < size; row++) {
 			System.out.print((size - row) + " ");
 			for (int column = 0; column < size; column++) {
-				print(chessPieceMatrix[row][column]);
+				print(chessPieceMatrix[row][column], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h ");
 	}
 
-	private static void print(ChessPiece chessPiece) {
+	private static void print(ChessPiece chessPiece, boolean background) {
+		if (background) {
+			System.out.print(AnsiColors.ANSI_BLUE_BACKGROUND);
+		}
 		if (chessPiece == null) {
 			System.out.print("-" + AnsiColors.ANSI_RESET);
 		} else {

@@ -41,9 +41,7 @@ public abstract class ChessPiece extends Piece {
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	protected boolean isThereOpponentPiece(Position position) {
 		ChessPiece opponentPiece = (ChessPiece) getBoard().getPiece(position);
-		boolean isNotNull = opponentPiece != null;
-		boolean isNotSameColor = opponentPiece.getColor() != this.color;
-		return isNotNull && isNotSameColor;
+		return opponentPiece != null && opponentPiece.getColor() != this.color;
 	}
 
 }

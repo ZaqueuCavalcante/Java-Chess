@@ -48,8 +48,11 @@ public class ChessMatch {
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	public boolean possibleMoves(ChessPosition sourcePosition) {
-		return true;
+	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+		Position source = sourcePosition.toPosition();
+		validateSourcePosition(source);
+		boolean[][] possibleMovesMatrix = board.getPiece(source).possibleMoves();
+		return possibleMovesMatrix;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -57,7 +60,7 @@ public class ChessMatch {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
 		validateSourcePosition(source);
-		//validateTargetPosition(source, target);
+		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
 		return (ChessPiece) capturedPiece;
 	}
