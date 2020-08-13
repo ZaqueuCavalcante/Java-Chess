@@ -9,6 +9,7 @@ import board.layer.Piece;
 import board.layer.Position;
 import chess.pieces.Bishop;
 import chess.pieces.King;
+import chess.pieces.Knight;
 import chess.pieces.Pawn;
 import chess.pieces.Rook;
 import view.layer.Color;
@@ -76,6 +77,7 @@ public class ChessMatch {
 		placePiece(new King(board, Color.WHITE), 'e', 1);
 		placePiece(new Rook(board, Color.WHITE), 'h', 1);
 		placePiece(new Bishop(board, Color.WHITE), 'd', 4);
+		placePiece(new Knight(board, Color.WHITE), 'f', 4);
 //		placePiece(new Pawn(board, Color.WHITE), 'a', 2);
 		placePiece(new Pawn(board, Color.WHITE), 'b', 2);
 		placePiece(new Pawn(board, Color.WHITE), 'c', 2);
