@@ -2,23 +2,19 @@ package chess.pieces;
 
 import board.layer.Board;
 import board.layer.Position;
-import chess.layer.ChessMatch;
 import chess.layer.ChessPiece;
 import view.layer.Color;
 
-public class King extends ChessPiece {
-	
-	private ChessMatch chessMatch;
+public class Queen extends ChessPiece {
 
-	public King(Board board, Color color, ChessMatch chessMatch) {
+	public Queen(Board board, Color color) {
 		super(board, color);
-		this.chessMatch = chessMatch;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	@Override
 	public String toString() {
-		return "K";
+		return "Q";
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -47,27 +43,28 @@ public class King extends ChessPiece {
 		int newColumn = this.position.getColumn() + columnIncrement;
 		nextPositionToCheck.setRowAndColumn(newRow, newColumn);
 
-		if (conditionsToMove(nextPositionToCheck)) {
+		while (thereNoIsAPiece(nextPositionToCheck)) {
+			possibleMovesMatrix[newRow][newColumn] = true;
+			newRow += rowIncrement;
+			newColumn += columnIncrement;
+			nextPositionToCheck.setRowAndColumn(newRow, newColumn);
+		}
+		if (thereIsOpponentPiece(nextPositionToCheck)) {
 			possibleMovesMatrix[newRow][newColumn] = true;
 		}
 	}
 
-	private boolean conditionsToMove(Position nextPositionToCheck) {
-		if (!this.getBoard().positionExists(nextPositionToCheck)) return false;
+	private boolean thereNoIsAPiece(Position nextPositionToCheck) {
+		if (!this.getBoard().positionExists(nextPositionToCheck))
+			return false;
 		boolean thereNoIsAPiece = !this.getBoard().thereIsAPiece(nextPositionToCheck);
-		boolean isThereOpponentPiece = this.isThereOpponentPiece(nextPositionToCheck);
-		return thereNoIsAPiece || isThereOpponentPiece;
-	}
-	
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-	private boolean testRookCastling(Position rookPosition) {
-		ChessPiece rook = (ChessPiece) getBoard().getPiece(rookPosition);
-		boolean notNull = rook != null;
-		boolean classMatch = rook instanceof Rook;
-		boolean colorMatch = rook.getColor() == this.getColor();
-		boolean hasZeroMoves = rook.getMoveCount() == 0;
-		return notNull && classMatch && colorMatch && hasZeroMoves;
-		
+		return thereNoIsAPiece;
 	}
 
+	private boolean thereIsOpponentPiece(Position nextPositionToCheck) {
+		if (!this.getBoard().positionExists(nextPositionToCheck))
+			return false;
+		boolean thereIsOpponentPiece = this.isThereOpponentPiece(nextPositionToCheck);
+		return thereIsOpponentPiece;
+	}
 }

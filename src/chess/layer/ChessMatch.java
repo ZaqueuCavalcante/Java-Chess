@@ -11,6 +11,7 @@ import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Knight;
 import chess.pieces.Pawn;
+import chess.pieces.Queen;
 import chess.pieces.Rook;
 import view.layer.Color;
 
@@ -74,10 +75,11 @@ public class ChessMatch {
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private void placeInitialPieces() {
 		placePiece(new Rook(board, Color.WHITE), 'a', 1);
-		placePiece(new King(board, Color.WHITE), 'e', 1);
+		placePiece(new King(board, Color.WHITE, this), 'e', 1);
 		placePiece(new Rook(board, Color.WHITE), 'h', 1);
 		placePiece(new Bishop(board, Color.WHITE), 'd', 4);
 		placePiece(new Knight(board, Color.WHITE), 'f', 4);
+		placePiece(new Queen(board, Color.WHITE), 'b', 4);
 //		placePiece(new Pawn(board, Color.WHITE), 'a', 2);
 		placePiece(new Pawn(board, Color.WHITE), 'b', 2);
 		placePiece(new Pawn(board, Color.WHITE), 'c', 2);
@@ -88,7 +90,7 @@ public class ChessMatch {
 		placePiece(new Pawn(board, Color.WHITE), 'h', 2);
 
 		placePiece(new Rook(board, Color.BLACK), 'a', 8);
-		placePiece(new King(board, Color.BLACK), 'e', 8);
+		placePiece(new King(board, Color.BLACK, this), 'e', 8);
 		placePiece(new Rook(board, Color.BLACK), 'h', 8);
         placePiece(new Pawn(board, Color.BLACK), 'a', 7);
         placePiece(new Pawn(board, Color.BLACK), 'b', 7);
