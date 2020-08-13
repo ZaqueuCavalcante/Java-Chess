@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import board.layer.Board;
 import board.layer.Piece;
 import board.layer.Position;
+import chess.pieces.Bishop;
 import chess.pieces.King;
+import chess.pieces.Pawn;
 import chess.pieces.Rook;
 import view.layer.Color;
 
@@ -70,40 +72,30 @@ public class ChessMatch {
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private void placeInitialPieces() {
-		placePiece(new Rook(board, Color.WHITE), 'h', 7);
-		placePiece(new Rook(board, Color.WHITE), 'd', 1);
-//		placePiece(new Knight(board, Color.WHITE), 'b', 1);
-//		placePiece(new Bishop(board, Color.WHITE), 'c', 1);
-//		placePiece('d', 1, new Queen(board, Color.WHITE));
+		placePiece(new Rook(board, Color.WHITE), 'a', 1);
 		placePiece(new King(board, Color.WHITE), 'e', 1);
-//		placePiece('f', 1, new Bishop(board, Color.WHITE));
-//		placePiece('g', 1, new Knight(board, Color.WHITE));
-//		placePiece('h', 1, new Rook(board, Color.WHITE));
-//		placePiece('a', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('b', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('c', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('d', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('e', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('f', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('g', 2, new Pawn(board, Color.WHITE, this));
-//		placePiece('h', 2, new Pawn(board, Color.WHITE, this));
+		placePiece(new Rook(board, Color.WHITE), 'h', 1);
+		placePiece(new Bishop(board, Color.WHITE), 'd', 4);
+//		placePiece(new Pawn(board, Color.WHITE), 'a', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'b', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'c', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'd', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'e', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'f', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'g', 2);
+		placePiece(new Pawn(board, Color.WHITE), 'h', 2);
 
-		placePiece(new Rook(board, Color.BLACK), 'b', 8);
-//	    placePiece('b', 8, new Knight(board, Color.BLACK));
-//	        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
-//	        placeNewPiece('d', 8, new Queen(board, Color.BLACK));
-		placePiece(new King(board, Color.BLACK), 'a', 8);
-//	        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
-//	        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
-//	        placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-//	        placeNewPiece('a', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('b', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('c', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('d', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('e', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('f', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('g', 7, new Pawn(board, Color.BLACK, this));
-//	        placeNewPiece('h', 7, new Pawn(board, Color.BLACK, this));
+		placePiece(new Rook(board, Color.BLACK), 'a', 8);
+		placePiece(new King(board, Color.BLACK), 'e', 8);
+		placePiece(new Rook(board, Color.BLACK), 'h', 8);
+        placePiece(new Pawn(board, Color.BLACK), 'a', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'b', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'c', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'd', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'e', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'f', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'g', 7);
+        placePiece(new Pawn(board, Color.BLACK), 'h', 7);
 	}
 
 	private void placePiece(ChessPiece chessPiece, char column, int row) {
