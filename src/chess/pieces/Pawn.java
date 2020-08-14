@@ -2,13 +2,17 @@ package chess.pieces;
 
 import board.layer.Board;
 import board.layer.Position;
+import chess.layer.ChessMatch;
 import chess.layer.ChessPiece;
 import view.layer.Color;
 
 public class Pawn extends ChessPiece {
 
-	public Pawn(Board board, Color color) {
+	private ChessMatch chessMatch;
+
+	public Pawn(Board board, Color color, ChessMatch chessMatch) {
 		super(board, color);
+		this.chessMatch = chessMatch;
 	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
@@ -34,6 +38,20 @@ public class Pawn extends ChessPiece {
 
 			checkUpDiagonal(possibleMovesMatrix, -1, -1); // Between above and left
 			checkUpDiagonal(possibleMovesMatrix, -1, +1); // Between right and above
+
+			// Special move: En passant
+			if (position.getRow() == 3) {
+				Position left = new Position(position.getRow(), position.getColumn() - 1);
+				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+						&& getBoard().getPiece(left) == chessMatch.getEnPassantVulnerable()) {
+					possibleMovesMatrix[left.getRow() - 1][left.getColumn()] = true;
+				}
+				Position right = new Position(position.getRow(), position.getColumn() + 1);
+				if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+						&& getBoard().getPiece(right) == chessMatch.getEnPassantVulnerable()) {
+					possibleMovesMatrix[right.getRow() - 1][right.getColumn()] = true;
+				}
+			}
 		} else {
 			if (this.getMoveCount() == 0) {
 				if (checkUpFront(possibleMovesMatrix, +1, 0)) {
@@ -44,6 +62,20 @@ public class Pawn extends ChessPiece {
 
 			checkUpDiagonal(possibleMovesMatrix, +1, -1); // Between left and down
 			checkUpDiagonal(possibleMovesMatrix, +1, +1); // Between down and right
+
+			// Special move: En passant
+			if (position.getRow() == 4) {
+				Position left = new Position(position.getRow(), position.getColumn() - 1);
+				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+						&& getBoard().getPiece(left) == chessMatch.getEnPassantVulnerable()) {
+					possibleMovesMatrix[left.getRow() + 1][left.getColumn()] = true;
+				}
+				Position right = new Position(position.getRow(), position.getColumn() + 1);
+				if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+						&& getBoard().getPiece(right) == chessMatch.getEnPassantVulnerable()) {
+					possibleMovesMatrix[right.getRow() + 1][right.getColumn()] = true;
+				}
+			}
 		}
 
 		return possibleMovesMatrix;
