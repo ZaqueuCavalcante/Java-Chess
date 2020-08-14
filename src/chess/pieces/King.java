@@ -88,11 +88,13 @@ public class King extends ChessPiece {
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 	private boolean testRookCastling(Position rookPosition) {
 		ChessPiece rook = (ChessPiece) getBoard().getPiece(rookPosition);
-		boolean notNull = rook != null;
-		boolean classMatch = rook instanceof Rook;
-		boolean colorMatch = rook.getColor() == this.getColor();
-		boolean hasZeroMoves = rook.getMoveCount() == 0;
-		return notNull && classMatch && colorMatch && hasZeroMoves;
+		if (rook != null) {
+			boolean classMatch = rook instanceof Rook;
+			boolean colorMatch = rook.getColor() == this.getColor();
+			boolean hasZeroMoves = rook.getMoveCount() == 0;
+			return classMatch && colorMatch && hasZeroMoves;
+		}
+		return false;
 	}
 
 	private boolean conditionsToRookCastling() {
